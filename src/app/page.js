@@ -492,7 +492,7 @@ function ProductCard({ product, quantity, onPlus, onMinus, colors }) {
             <img
               src={product.image || placeholderImage}
               alt={product.name}
-              className="h-full w-full object-contain object-center p-3 transition-transform duration-300 sm:scale-[1.05] sm:p-2 md:scale-[1.1] md:p-1 md:group-hover:scale-[1.14]"
+              className="h-full w-full object-contain object-center scale-[1.14] p-0 transition-transform duration-300 sm:scale-[1.2] sm:p-0 md:scale-[1.24] md:p-0 md:group-hover:scale-[1.28]"
             />
           </div>
           <div className="absolute left-3 top-3">
