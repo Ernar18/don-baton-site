@@ -488,11 +488,11 @@ function ProductCard({ product, quantity, onPlus, onMinus, colors }) {
     <motion.div layout>
       <Card className="group overflow-hidden rounded-[28px] border-0 bg-white shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
         <div className="relative overflow-hidden bg-stone-50">
-          <div className="aspect-[1/1] w-full min-h-[340px]">
+          <div className="aspect-[1/1] w-full min-h-[220px] sm:min-h-[280px] lg:min-h-[340px]">
             <img
               src={product.image || placeholderImage}
               alt={product.name}
-              className="h-full w-full object-contain object-center scale-[1.45] p-0 transition-transform duration-300 group-hover:scale-[1.5]"
+              className="h-full w-full object-contain object-center scale-[1.08] p-2 transition-transform duration-300 group-hover:scale-[1.12] sm:scale-[1.2] sm:p-1 sm:group-hover:scale-[1.24]"
             />
           </div>
           <div className="absolute left-3 top-3">
@@ -505,17 +505,17 @@ function ProductCard({ product, quantity, onPlus, onMinus, colors }) {
           </div>
         </div>
 
-        <CardContent className="space-y-4 p-4 sm:p-5">
+        <CardContent className="space-y-4 p-3 sm:p-5">
           <div>
-            <h4 className="line-clamp-2 text-base font-bold leading-snug text-stone-900 sm:text-lg">
+            <h4 className="line-clamp-2 text-base font-bold leading-snug text-stone-900 sm:text-lg break-words">
               {product.name}
             </h4>
             <p className="mt-2 line-clamp-2 text-sm text-stone-500">{product.description}</p>
           </div>
 
-          <div className="flex items-center justify-between gap-3">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <div className="text-sm font-medium text-stone-500">Ед. изм.: {product.unit}</div>
-            <div className="flex items-center gap-1 rounded-full border border-amber-200 bg-amber-50 px-2 py-1">
+            <div className="ml-auto flex items-center gap-1 rounded-full border border-amber-200 bg-amber-50 px-2 py-1 sm:ml-0">
               <Button type="button" size="icon" variant="ghost" className="h-8 w-8 rounded-full" onClick={onMinus}>
                 <MinusIcon className="h-4 w-4" />
               </Button>
