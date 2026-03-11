@@ -1378,13 +1378,20 @@ export default function DonBatonSite() {
 
         <section className="mt-10 grid gap-4 md:grid-cols-3">
           <Card className="rounded-[28px] border-0 bg-white shadow-lg">
-            <CardContent className="p-5">
-              <div className="flex items-center gap-3 font-semibold">
-                <InstagramIcon className="h-5 w-5" style={{ color: colors.primary }} /> Instagram
-              </div>
-              <p className="mt-2 text-stone-600">@{siteData.company.instagram}</p>
-            </CardContent>
-          </Card>
+  <CardContent className="p-5">
+    <div className="flex items-center gap-3 font-semibold">
+      <InstagramIcon className="h-5 w-5" style={{ color: colors.primary }} /> Instagram
+    </div>
+    <a
+      href={`https://instagram.com/${siteData.company.instagram}`}
+      target="_blank"
+      rel="noreferrer"
+      className="mt-2 inline-block text-stone-600 underline"
+    >
+      @{siteData.company.instagram}
+    </a>
+  </CardContent>
+</Card>
           <Card className="rounded-[28px] border-0 bg-white shadow-lg">
             <CardContent className="p-5">
               <div className="flex items-center gap-3 font-semibold">
