@@ -488,11 +488,11 @@ function ProductCard({ product, quantity, onPlus, onMinus, colors }) {
     <motion.div layout>
       <Card className="group overflow-hidden rounded-[28px] border-0 bg-white shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
         <div className="relative overflow-hidden bg-stone-50">
-          <div className="aspect-[1/1] w-full min-h-[180px] sm:min-h-[240px] lg:min-h-[340px] overflow-hidden bg-white">
+          <div className="aspect-[1/1] w-full min-h-[180px] overflow-hidden bg-white sm:min-h-[240px] lg:min-h-[340px]">
             <img
               src={product.image || placeholderImage}
               alt={product.name}
-              className="h-full w-full object-cover object-center scale-[1.18] transition-transform duration-300 sm:scale-[1.12] md:scale-[1.08] md:group-hover:scale-[1.12]"
+              className="h-full w-full object-contain object-center p-2 transition-transform duration-300"
             />
           </div>
           <div className="absolute left-3 top-3">
