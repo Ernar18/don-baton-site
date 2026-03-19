@@ -1026,18 +1026,30 @@ export default function DonBatonSite() {
   };
 
   const sendToWhatsApp = () => {
-    if (!customer.storeName.trim() || !customer.address.trim() || !customer.contact.trim()) {
-      alert("Заполните название магазина, адрес и контакты");
-      return;
-    }
-    if (!selectedProducts.length) {
-      alert("Выберите хотя бы один товар");
-      return;
-    }
-    const text = buildWhatsAppMessageText(siteData, customer, selectedProducts, cart);
-    const url = buildWhatsAppUrl(siteData.company.whatsapp, text);
-    window.open(url, "_blank");
-  };
+  if (!customer.storeName.trim() || !customer.address.trim() || !customer.contact.trim()) {
+    alert("Заполните название магазина, адрес и контакты");
+    return;
+  }
+
+  if (!selectedProducts.length) {
+    alert("Выберите хотя бы один товар");
+    return;
+  }
+
+  const totalAmount = selectedProducts.reduce(
+    (sum, product) => sum + product.price * (cart[product.id] || 0),
+    0
+  );
+
+  if (totalAmount < 10000) {
+    alert(`Минимальная сумма заказа — 10 000₸. Сейчас у вас: ${totalAmount}₸`);
+    return;
+  }
+
+  const text = buildWhatsAppMessageText(siteData, customer, selectedProducts, cart);
+  const url = buildWhatsAppUrl(siteData.company.whatsapp, text);
+  window.open(url, "_blank");
+};
 
   if (isBootLoading) {
     return (
