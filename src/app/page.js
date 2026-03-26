@@ -889,6 +889,39 @@ export default function DonBatonSite() {
     }));
   };
 
+  const moveProduct = (categoryId, sectionId, index, direction) => {
+  setSiteData((prev) => ({
+    ...prev,
+    categories: prev.categories.map((category) =>
+      category.id === categoryId
+        ? {
+            ...category,
+            sections: category.sections.map((section) => {
+              if (section.id !== sectionId) return section;
+
+              const newProducts = [...section.products];
+              const newIndex = index + direction;
+
+              if (newIndex < 0 || newIndex >= newProducts.length) {
+                return section;
+              }
+
+              [newProducts[index], newProducts[newIndex]] = [
+                newProducts[newIndex],
+                newProducts[index],
+              ];
+
+              return {
+                ...section,
+                products: newProducts,
+              };
+            }),
+          }
+        : category
+    ),
+  }));
+};
+
   const addDirectProduct = (categoryId) => {
     const newProduct = {
       id: makeId(),
@@ -1737,8 +1770,29 @@ export default function DonBatonSite() {
                                         </div>
 
                                         <div className="space-y-4">
-                                          {section.products.map((product) => (
+                                          {section.products.map((product, index) => (
                                             <div key={product.id} className="rounded-2xl border border-dashed p-4">
+
+                                              <div className="flex gap-2 mb-2">
+                                                <Button
+                                                  type="button"
+                                                  variant="outline"
+                                                  onClick={() => moveProduct(category.id, section.id, index, -1)}
+                                                  disabled={index === 0}
+                                                >
+                                                  ⬆️
+                                                </Button>
+
+                                                <Button
+                                                  type="button"
+                                                  variant="outline"
+                                                  onClick={() => moveProduct(category.id, section.id, index, 1)}
+                                                  disabled={index === section.products.length - 1}
+                                                >
+                                                  ⬇️
+                                                </Button>
+                                              </div>
+
                                               <div className="grid gap-3 sm:grid-cols-2">
                                                 <AdminInput
                                                   label="Название товара"
