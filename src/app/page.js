@@ -866,6 +866,40 @@ export default function DonBatonSite() {
   };
 
   const addProduct = (categoryId, sectionId) => {
+    const changeProductSection = (categoryId, oldSectionId, newSectionId, productId) => {
+      setSiteData((prev) => ({
+        ...prev,
+        categories: prev.categories.map((category) => {
+          if (category.id !== categoryId) return category;
+
+          let movedProduct = null;
+
+          const updatedSections = category.sections.map((section) => {
+            if (section.id === oldSectionId) {
+              const filtered = section.products.filter((p) => {
+                if (p.id === productId) {
+                  movedProduct = p;
+                  return false;
+                }
+                return true;
+              });
+              return { ...section, products: filtered };
+            }
+            return section;
+          });
+
+          return {
+            ...category,
+            sections: updatedSections.map((section) =>
+              section.id === newSectionId && movedProduct
+                ? { ...section, products: [...section.products, movedProduct] }
+                : section
+            ),
+          };
+        }),
+      }));
+    };
+
     const newProduct = {
       id: makeId(),
       name: "Новый товар",
@@ -1772,6 +1806,20 @@ export default function DonBatonSite() {
                                         <div className="space-y-4">
                                           {section.products.map((product, index) => (
                                             <div key={product.id} className="rounded-2xl border border-dashed p-4">
+                                              <select
+                                                value={section.id}
+                                                onChange={(e) =>
+                                                  changeProductSection(category.id, section.id, e.target.value, product.id)
+                                                }
+                                                className="border p-1 rounded mb-2"
+                                              >
+                                                {category.sections.map((s) => (
+                                                  <option key={s.id} value={s.id}>
+                                                    {s.name}
+                                                  </option>
+                                                ))}
+                                              </select>
+                                              
 
                                               <div className="flex gap-2 mb-2">
                                                 <Button
